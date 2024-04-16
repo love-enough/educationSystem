@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>发布新闻</title>
+    <link th:href="@{/BootStrap/css/bootstrap.css}" rel="stylesheet">
+    <style>
+        #sidebar{
+            width: 200px;
+            position: absolute;
+            z-index: 1;
+        }
+        #main{
+            margin-left: 210px;
+            margin-right: 10px;
+            width: 1200px;
+            margin-top: 74px;
+        }
+        .active {
+            color: whitesmoke;
+        }
+    </style>
+</head>
+<body>
+<!--导航-->
+<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+    <div class="navbar-header">
+        <a href="#" class="navbar-brand">后台管理</a>
+    </div>
+    <ul class="nav navbar-nav" style="margin-right: 20px">
+        <li><a th:href="@{/user/userList}" class="active">&nbsp;学生管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px; color: whitesmoke">
+        <li><a th:href="@{/user/teacherList}">&nbsp;教师管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px">
+        <li><a href="#">&nbsp;课程管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px">
+        <li><a th:href="@{/news/newsList}">&nbsp;新闻管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px">
+        <li><a th:href="@{/image/imageList}">&nbsp;轮播图管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px">
+        <li><a href="#">&nbsp;作业管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
+        <li><a href="#">&nbsp;退出</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
+        <li><a href="#">&nbsp;guozihan</a></li>
+    </ul>
+</div>
+<div id="main">
+    <!--面包导航-->
+    <ol class="breadcrumb">
+        <li><a th:href="@{/news/newsList}">返回新闻列表</a></li>
+    </ol>
+    <div class="row">
+        <div class="col-sm-12">
+            <!--表格-->
+            <div class="panel panel-default">
+                <div class="panel-heading">发布新闻</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" th:action="@{/news/addNews}" method="post">
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label">标题</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="title" placeholder="请输入标题" name="title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="content" class="col-sm-2 control-label">内容</label>
+                            <div class="col-sm-5">
+                                <textarea class="form-control" id="content" name="content" cols="20" rows="20"></textarea>
+                            </div>
+                        </div>
+                        <span th:utext="${message == null ? '' : message.message}" style="color: red"></span>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div><!-- 第一行-->
+
+</div>
+<script th:src="@{/jQuery/jquery-2.1.4.min.js}"></script>
+<script th:src="@{/BootStrap/js/bootstrap.js}"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>简单的后台管理</title>
+    <link th:href="@{/BootStrap/css/bootstrap.css}" rel="stylesheet">
+    <style>
+        #sidebar{
+            width: 200px;
+            position: absolute;
+            z-index: 1;
+        }
+        #main{
+            margin-left: 210px;
+            margin-right: 10px;
+            width: 1200px;
+            margin-top: 74px;
+        }
+        .active {
+            color: whitesmoke;
+        }
+    </style>
+</head>
+<body>
+<!--导航-->
+<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+    <div class="navbar-header">
+        <a href="#" class="navbar-brand">后台管理</a>
+    </div>
+    <ul class="nav navbar-nav" style="margin-right: 20px">
+        <li><a th:href="@{/user/userList}" class="active">&nbsp;学生管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px; color: whitesmoke">
+        <li><a th:href="@{/user/teacherList}">&nbsp;教师管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px">
+        <li><a href="#">&nbsp;课程管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px">
+        <li><a th:href="@{/news/newsList}">&nbsp;新闻管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px">
+        <li><a th:href="@{/image}">&nbsp;轮播图管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px">
+        <li><a href="#">&nbsp;作业管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
+        <li><a href="#">&nbsp;退出</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
+        <li><a href="#">&nbsp;guozihan</a></li>
+    </ul>
+</div>
+<!--侧边栏-->
+<!--<div class="navbar-default navbar-collapse" id="sidebar">-->
+<!--    <ul class="nav">-->
+<!--        <li>-->
+<!--            <a href="#sub1" data-toggle="collapse">系统功能<span class="glyphicon glyphicon-chevron-down pull-right"></span></a>-->
+<!--            <ul id="sub1" class="nav collapse">-->
+<!--                <li><a th:href="@{/login}">&nbsp;&nbsp;&nbsp;系统信息</a></li>-->
+<!--                <li><a href="">&nbsp;&nbsp;&nbsp;管理员</a></li>-->
+<!--                <li><a href="">&nbsp;&nbsp;&nbsp;日志</a></li>-->
+<!--            </ul>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="#sub2" data-toggle="collapse">系统功能<span class="glyphicon glyphicon-chevron-down pull-right"></span></a>-->
+<!--            <ul id="sub2" class="nav collapse">-->
+<!--                <li><a href="">&nbsp;&nbsp;&nbsp;系统信息</a></li>-->
+<!--                <li><a href="">&nbsp;&nbsp;&nbsp;管理员</a></li>-->
+<!--                <li><a href="">&nbsp;&nbsp;&nbsp;日志</a></li>-->
+<!--            </ul>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+<!--主页面-->
+<div id="main">
+<!--    &lt;!&ndash;面包导航&ndash;&gt;-->
+<!--    <ol class="breadcrumb">-->
+<!--        <li><a href="#">新闻</a></li>-->
+<!--        <li><a href="#">国内新闻</a></li>-->
+<!--        <li><a href="#">体育新闻</a></li>-->
+<!--    </ol>-->
+    <!-- 第一行-->
+    <div class="row">
+        <div class="col-sm-12">
+            <!--表格-->
+            <div class="panel panel-default">
+                <div class="panel-heading">测试</div>
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered">
+                        <thead><tr><th>编号</th><th>商品</th><th>数量</th></tr></thead>
+                        <tbody>
+                        <tr><td>1</td><td>苹果</td><td>3</td></tr>
+                        <tr><td>2</td><td>西瓜</td><td>5</td></tr>
+                        <tr><td>3</td><td>香蕉</td><td>1</td></tr>
+                        </tbody>
+                        <tfoot><tr><td colspan="2">合计</td><td>9</td></tr></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div><!-- 第一行-->
+</div>
+<script th:src="@{/jQuery/jquery-2.1.4.min.js}"></script>
+<script th:src="@{/BootStrap/js/bootstrap.js}"></script>
+</body>
+</html>
