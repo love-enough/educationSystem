@@ -16,4 +16,25 @@
         id,teacher_id,description,
         url,create_time
     </sql>
+
+    <sql id="insert">
+        teacher_id,description,
+        url,create_time
+    </sql>
+
+    <insert id="addVideo" parameterType="Video" keyProperty="id">
+        insert into video (<include refid="insert"></include>)
+        values(#{teacher_id}, #{description}, #{url}, #{create_time})
+    </insert>
+
+    <delete id="deleteById">
+        delete from video where id = #{id}
+    </delete>
+
+    <select id="selectAll" resultType="com.program.education.entity.Video">
+        select <include refid="Base_Column_List"></include>
+        from video
+        order by create_time desc
+        limit #{offset}, #{limit}
+    </select>
 </mapper>

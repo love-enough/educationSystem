@@ -1,7 +1,9 @@
 package com.program.education.controller;
 
 import com.program.education.entity.News;
+import com.program.education.entity.Page;
 import com.program.education.service.NewsService;
+import com.program.education.utils.HostHolder;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,15 +22,20 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
 
+    @Autowired
+    private HostHolder hostHolder;
+
     @RequestMapping(path = "/newsList", method = RequestMethod.GET)
-    public String getNews(Model model) {
-        List<News> news = newsService.selectAll();
+    public String getNews(Model model, Page page) {
+        page.setRows(newsService.selectAll(page.getoffset(), page.getLimit()).size());
+        page.setPath("/news/newsList");
+        List<News> news = newsService.selectAll(page.getoffset(), page.getLimit());
         model.addAttribute("newsList", news);
         return "site/news";
     }
 
     @RequestMapping(path = "/addNews", method = RequestMethod.GET)
-    public String addNews() {
+    public String addNews(Model model) {
         return "site/addNews";
     }
 

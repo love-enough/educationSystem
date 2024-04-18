@@ -65,6 +65,14 @@
         where type = #{type}
     </select>
 
+    <select id="selectUsers" resultType="com.program.education.entity.User">
+        select <include refid="Base_Column_List"></include>
+        from user
+        where type = #{type}
+        order by create_time desc
+        limit #{offset}, #{limit}
+    </select>
+
     <insert id="insertUser" parameterType="User" keyProperty="id">
         insert into user (<include refid="insertFields"></include>)
         values(#{username}, #{password}, #{name}, #{sex}, #{type}, #{create_time})

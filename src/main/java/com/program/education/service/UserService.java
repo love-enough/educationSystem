@@ -25,4 +25,6 @@ public interface UserService{
     User selectByUsername(String username, int type);
 
     List<User> selectUserList(int type);
+
+    List<User> selectUsers(int type, int offset, int limit);
 }

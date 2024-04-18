@@ -20,7 +20,7 @@
 </head>
 <body>
 <!--导航-->
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top" th:replace="index::header">
     <div class="navbar-header">
         <a href="#" class="navbar-brand">后台管理</a>
     </div>
@@ -31,7 +31,7 @@
         <li><a th:href="@{/user/teacherList}">&nbsp;教师管理</a></li>
     </ul>
     <ul class="nav navbar-nav" style="margin-right: 20px">
-        <li><a href="#">&nbsp;课程管理</a></li>
+        <li><a th:href="@{/video/videoList}">&nbsp;视频管理</a></li>
     </ul>
     <ul class="nav navbar-nav" style="margin-right: 20px">
         <li><a th:href="@{/news/newsList}">&nbsp;新闻管理</a></li>
@@ -40,13 +40,13 @@
         <li><a th:href="@{/image/imageList}">&nbsp;轮播图管理</a></li>
     </ul>
     <ul class="nav navbar-nav" style="margin-right: 20px">
-        <li><a href="#">&nbsp;作业管理</a></li>
+        <li><a th:href="@{/work/workList}">&nbsp;作业管理</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
-        <li><a href="#">&nbsp;退出</a></li>
+        <li><a th:href="@{/logout}">&nbsp;退出</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
-        <li><a href="#">&nbsp;guozihan</a></li>
+        <li><a th:href="@{/my}" th:if="${loginUser!=null}"> <span th:utext="${loginUser.name}">admin</span>&nbsp;</a></li>
     </ul>
 </div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -98,9 +98,26 @@
                             </td>
                         </tr>
                         </tbody>
-                        <tfoot><tr><td colspan="2">合计</td><td>9</td></tr></tfoot>
                     </table>
                 </div>
+                <nav class="mt-5" th:if="${page.rows>0}" th:fragment="pagination">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
+                        </li>
+                        <li th:class="|page-item ${page.current==1?'disabled':''}|">
+                            <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
+                        <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
+                            <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
+                        </li>
+                        <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
+                            <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div><!-- 第一行-->

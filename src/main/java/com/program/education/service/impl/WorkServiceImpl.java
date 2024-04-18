@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.program.education.entity.Work;
 import com.program.education.service.WorkService;
 import com.program.education.mapper.WorkMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
 * @author xihua
@@ -14,6 +17,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class WorkServiceImpl implements WorkService{
 
+    @Autowired
+    private WorkMapper workMapper;
+
+    @Override
+    public List<Work> selectAll(int offset, int limit) {
+        return workMapper.selectAll(offset, limit);
+    }
+
+    @Override
+    public Work selectById(int id) {
+        return workMapper.selectById(id);
+    }
+
+    @Override
+    public int addWork(Work work) {
+        return workMapper.addWork(work);
+    }
+
+    @Override
+    public int deleteById(int id) {
+        return workMapper.deleteWork(id);
+    }
 }
 
 

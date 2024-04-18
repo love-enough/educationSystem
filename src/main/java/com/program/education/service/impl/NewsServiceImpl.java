@@ -22,13 +22,18 @@ public class NewsServiceImpl implements NewsService{
 
 
     @Override
-    public List<News> selectAll() {
-        return newsMapper.selectAll();
+    public List<News> selectAll(int offset, int limit) {
+        return newsMapper.selectAll(offset, limit);
     }
 
     @Override
     public int addNews(News news) {
         return newsMapper.addNews(news);
+    }
+
+    @Override
+    public int deleteNews(int id) {
+        return newsMapper.deleteById(id);
     }
 }
 

@@ -23,7 +23,9 @@
 </head>
 <body>
 <!--导航-->
-<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+<div class="navbar navbar-inverse navbar-fixed-top" th:replace="index::header">
+
+
     <div class="navbar-header">
         <a href="#" class="navbar-brand">后台管理</a>
     </div>
@@ -34,7 +36,7 @@
         <li><a th:href="@{/user/teacherList}">&nbsp;教师管理</a></li>
     </ul>
     <ul class="nav navbar-nav" style="margin-right: 20px">
-        <li><a href="#">&nbsp;课程管理</a></li>
+        <li><a th:href="@{/video/videoList}">&nbsp;视频管理</a></li>
     </ul>
     <ul class="nav navbar-nav" style="margin-right: 20px">
         <li><a th:href="@{/news/newsList}">&nbsp;新闻管理</a></li>
@@ -43,13 +45,13 @@
         <li><a th:href="@{/image/imageList}">&nbsp;轮播图管理</a></li>
     </ul>
     <ul class="nav navbar-nav" style="margin-right: 20px">
-        <li><a href="#">&nbsp;作业管理</a></li>
+        <li><a th:href="@{/work/workList}">&nbsp;作业管理</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
-        <li><a href="#">&nbsp;退出</a></li>
+        <li><a th:href="@{/logout}">&nbsp;退出</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
-        <li><a href="#">&nbsp;guozihan</a></li>
+        <li><a th:href="@{/my}" th:if="${loginUser!=null}"> <span th:utext="${loginUser.name}">admin</span>&nbsp;</a></li>
     </ul>
 </div>
 <div id="main">

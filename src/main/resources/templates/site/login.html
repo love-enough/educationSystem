@@ -1,182 +1,102 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>登录</title>
-    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
-<!--    <link rel="stylesheet" th:href="@{/css/login.css}">-->
+    <title>后台管理-登陆</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
     <style>
-        .demo-login-container{width: 320px; margin: 21px auto 0;}
-        .demo-login-other .layui-icon{position: relative; display: inline-block; margin: 0 2px; top: 2px; font-size: 26px;}
-        .bgImage{width: 100%; height: 100%;}
+        html, body {width: 100%;height: 100%;overflow: hidden}
+        body {background: #1E9FFF;}
+        body:after {content:'';background-repeat:no-repeat;background-size:cover;-webkit-filter:blur(3px);-moz-filter:blur(3px);-o-filter:blur(3px);-ms-filter:blur(3px);filter:blur(3px);position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;}
+        .layui-container {width: 100%;height: 100%;overflow: hidden}
+        .admin-login-background {width:360px;height:300px;position:absolute;left:50%;top:40%;margin-left:-180px;margin-top:-100px;}
+        .logo-title {text-align:center;letter-spacing:2px;padding:14px 0;}
+        .logo-title h1 {color:#1E9FFF;font-size:25px;font-weight:bold;}
+        .login-form {background-color:#fff;border:1px solid #fff;border-radius:3px;padding:14px 20px;box-shadow:0 0 8px #eeeeee;}
+        .login-form .layui-form-item {position:relative;}
+        .login-form .layui-form-item label {position:absolute;left:1px;top:1px;width:38px;line-height:36px;text-align:center;color:#d2d2d2;}
+        .login-form .layui-form-item input {padding-left:36px;}
+        .captcha {width:60%;display:inline-block;}
+        .captcha-img {display:inline-block;width:34%;float:right;}
+        .captcha-img img {height:34px;border:1px solid #e6e6e6;height:36px;width:100%;}
     </style>
 </head>
-<body style="background-color: #D3D4D3">
-<!--<img th:src="@{/images/login-bg.jpg}" alt="背景图" class="bgImage">-->
-<form class="layui-form" style="margin: 15% auto;" th:action="@{/login}" method="post">
-    <div class="demo-login-container">
-        <div class="layui-form-item">
-            <div class="layui-input-wrap">
-                <div class="layui-input-prefix">
-                    <i class="layui-icon layui-icon-username"></i>
+<body>
+<div class="layui-container">
+    <div class="admin-login-background">
+        <div class="layui-form login-form">
+            <form class="layui-form" th:action="@{/login}" method="post">
+                <div class="layui-form-item logo-title">
+                    <h1>在线教育平台</h1>
                 </div>
-                <input type="text" name="username" value="" lay-verify="required" placeholder="用户名" lay-reqtext="请填写用户名" autocomplete="off" class="layui-input" lay-affix="clear">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-wrap">
-                <div class="layui-input-prefix">
-                    <i class="layui-icon layui-icon-password"></i>
+                <div class="layui-form-item">
+                    <label class="layui-icon layui-icon-username" for="username"></label>
+                    <input type="text" name="username" lay-verify="required|account" placeholder="用户名" autocomplete="off" class="layui-input">
                 </div>
-                <input type="password" name="password" value="" lay-verify="required" placeholder="密   码" lay-reqtext="请填写密码" autocomplete="off" class="layui-input" lay-affix="eye">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">角色</label>
-            <div class="layui-input-block">
-                <input type="radio" name="type" value="1" title="学生" checked>
-                <input type="radio" name="type" value="2" title="教师">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <p th:text="${loginMessage == null ? '' : loginMessage.message}" style="color: red"></p>
-        </div>
-<!--        <div class="layui-form-item">-->
-<!--            <div class="layui-row">-->
-<!--                <div class="layui-col-xs7">-->
-<!--                    <div class="layui-input-wrap">-->
-<!--                        <div class="layui-input-prefix">-->
-<!--                            <i class="layui-icon layui-icon-vercode"></i>-->
-<!--                        </div>-->
-<!--                        <input type="text" name="captcha" value="" lay-verify="required" placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off" class="layui-input" lay-affix="clear">-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="layui-col-xs5">-->
-<!--                    <div style="margin-left: 10px;">-->
-<!--                        <img src="https://www.oschina.net/action/user/captcha" onclick="this.src='https://www.oschina.net/action/user/captcha?t='+ new Date().getTime();">-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-        <div class="layui-form-item">
-<!--            <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">-->
-            <a href="#forget" style="float: right; margin-top: 7px;">忘记密码？</a>
-        </div>
-        <div class="layui-form-item">
-            <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-login">登录</button>
+                <div class="layui-form-item">
+                    <label class="layui-icon layui-icon-password" for="password"></label>
+                    <input type="password" name="password" lay-verify="required|password" placeholder="密码" autocomplete="off" class="layui-input">
+                </div>
+                    <input type="radio" name="type" class="layui-form-radio" value="2" title="教师">
+                    <input type="radio" name="type" class="layui-form-radio" value="1" title="学生">
+                    <input type="radio" name="type" class="layui-form-radio" value="3" title="管理员">
+                <div class="layui-form-item">
+                    <p th:text="${loginMessage == null ? '' : loginMessage.message}" style="color: red"></p>
+                </div>
+                <div class="layui-form-item">
+                    <button class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" lay-submit="" lay-filter="login" type="submit">登 入</button>
+                </div>
+            </form>
         </div>
     </div>
-</form>
-<script th:src="@{/layui/layui.js}"></script>
+</div>
+<script th:src="@{/lib/jquery-3.4.1/jquery-3.4.1.min.js}" charset="utf-8"></script>
+<script th:src="@{/lib/layui-v2.6.3/layui.js}" charset="utf-8"></script>
+<script th:src="@{/lib/jq-module/jquery.particleground.min.js}" charset="utf-8"></script>
 <script>
-    layui.use(function(){
-        var form = layui.form;
-        var layer = layui.layer;
-        // 提交事件
-        form.on('submit(demo-login)', function(data){
-            var field = data.field; // 获取表单字段值
-            console.log(field.username);
-            console.log(field.password);
-            console.log(field.type);
-            // 显示填写结果，仅作演示用
-            // layer.alert(JSON.stringify(field), {
-            //     title: '当前填写的字段值'
-            // });
-            // 此处可执行 Ajax 等操作
-            // …
-            // $.ajax({
-            //     url: "/education/login",
-            //     data: {
-            //         "username" : field.username,
-            //         "password" : field.password
-            //     },
-            //     type: 'post',
-            //     dataType: 'json',
-            //     success : function () {
-            //         console.log("success!");
-            //     }
-            // })
-            // return false; // 阻止默认 form 跳转
-        });
-    });
-    layui.use(["jquery","layer"],function(){
-        var $=layui.jquery;
-        var layer=layui.layer;
-        $("#loginBtn").click(function () {
-            var username = $('#loginUsername').val();
-            var password = $('#loginPassword').val();
-            console.log(username + "---" + password);
-            if ($.trim(username) == '' || $.trim(username).length<=0){
-                layer.alert("用户名不能为空");
-                return false;
-            }
-            if ($.trim(password) == '' || $.trim(password).length<=0){
-                layer.alert("密码不能为空");
-                return false;
-            }
-            $.ajax({
-                url: "/education/login",
-                data: {
-                    "username" : username,
-                    "password" : password
-                },
-                type: 'post',
-                dataType: 'json',
-                success : function () {
-                    console.log("success!");
-                }
-            })
-        })
-        function validateCode() {
-            var loginUsername = $('#loginUsername').val();
-            var loginPassword = $('#loginPassword').val();
-            console.log(loginUsername + "---" + loginPassword);
-            if ($.trim(loginUsername) == '' || $.trim(loginUsername).length<=0){
-                layer.alert("用户名不能为空");
-                return false;
-            }
-            if ($.trim(loginPassword) == '' || $.trim(loginPassword).length<=0){
-                layer.alert("密码不能为空");
-                return false;
-            }
-            return true;
-        }
-    });
-    // 校验验证码、用户名、密码
-    // 登录流程
-    function login() {
-        if (!validateCode()){
-            //阻断提示
-            layer.alert("帐密不能为空！");
-        }else {
-            var loginUsername = $('#loginUsername').val();
-            var loginPassword = $('#loginPassword').val();
-            var params = {};
-            params.loginUsername = loginUsername;
-            params.loginPassword = loginPassword;
-            var loginLoadIndex = layer.load(2);
-            $('#loginBtn').val("正在登录...");
-            $.ajax({
-                type:'post',
-                url:window.location.protocol+'//'+window.location.host+'/security-web/login.do',
-                dataType:'html',
-                data:JSON.stringify(params),
-                contentType:'application/json',
-                success:function (data) {
-                    layer.close(loginLoadIndex);
-                    var jsonData = JSON.parse(data);
-                    if (jsonData.code == '999'){
-                        window.location.href = './static/templates/main.html';
-                    }
-                },
-                error:function () {
-                    layer.close(loginLoadIndex);
-                    $('#loginBtn').val("登录");
-                }
-            });
-        }
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer;
 
-    }
+        // 登录过期的时候，跳出ifram框架
+        if (top.location != self.location) top.location = self.location;
+
+        // 粒子线条背景
+        $(document).ready(function(){
+            $('.layui-container').particleground({
+                dotColor:'#7ec7fd',
+                lineColor:'#7ec7fd'
+            });
+        });
+
+        // 进行登录操作
+        // form.on('submit(login)', function (data) {
+        //     data = data.field;
+        //     if (data.username == '') {
+        //         layer.msg('用户名不能为空');
+        //         return false;
+        //     }
+        //     if (data.password == '') {
+        //         layer.msg('密码不能为空');
+        //         return false;
+        //     }
+        //     if (data.type() == '') {
+        //         layer.msg('角色不能为空');
+        //         return false;
+        //     }
+        //     return false;
+        // });
+    });
 </script>
 </body>
 </html>

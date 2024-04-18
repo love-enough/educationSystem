@@ -27,6 +27,8 @@ public interface UserMapper{
 
     int updateUser(@Param("username") String username, @Param("password") String password, @Param("name") String name, @Param("sex") int sex, @Param("id") int id);
     List<User> selectUserList(@Param("type") int type);
+
+    List<User> selectUsers(@Param("type") int type, @Param("offset") int offset, @Param("limit") int limit);
 }
 
 

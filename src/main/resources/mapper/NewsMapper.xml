@@ -25,9 +25,14 @@
         insert into news (<include refid="insert"></include>)
         values(#{admin_id}, #{title}, #{content}, #{create_time})
     </insert>
+    <delete id="deleteById">
+        delete from news where id = #{id}
+    </delete>
 
     <select id="selectAll" resultType="com.program.education.entity.News">
         select <include refid="Base_Column_List"></include>
         from news
+        order by create_time desc
+        limit #{offset}, #{limit}
     </select>
 </mapper>

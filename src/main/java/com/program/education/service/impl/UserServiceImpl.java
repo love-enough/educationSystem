@@ -58,6 +58,11 @@ public class UserServiceImpl implements UserService{
         return userMapper.selectUserList(type);
     }
 
+    @Override
+    public List<User> selectUsers(int type, int offset, int limit) {
+        return userMapper.selectUsers(type, offset, limit);
+    }
+
 
 }
 

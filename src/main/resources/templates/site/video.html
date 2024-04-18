@@ -1,10 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>视频管理</title>
+    <link th:href="@{/BootStrap/css/bootstrap.css}" rel="stylesheet">
+    <style>
+        #sidebar{
+            width: 200px;
+            position: absolute;
+            z-index: 1;
+        }
+        #main{
+            margin-left: 210px;
+            margin-right: 10px;
+            width: 1200px;
+            margin-top: 74px;
+        }
+    </style>
 </head>
 <body>
+<!--导航-->
+<div class="navbar navbar-inverse navbar-fixed-top" th:replace="index::header">
+    <div class="navbar-header">
+        <a href="#" class="navbar-brand">后台管理</a>
+    </div>
+    <ul class="nav navbar-nav" style="margin-right: 20px">
+        <li><a th:href="@{/user/userList}" class="active">&nbsp;学生管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px; color: whitesmoke">
+        <li><a th:href="@{/user/teacherList}">&nbsp;教师管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px">
+        <li><a th:href="@{/video/videoList}">&nbsp;视频管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px">
+        <li><a th:href="@{/news/newsList}">&nbsp;新闻管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px">
+        <li><a th:href="@{/image/imageList}">&nbsp;轮播图管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px">
+        <li><a th:href="@{/work/workList}">&nbsp;作业管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
+        <li><a th:href="@{/logout}">&nbsp;退出</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
+        <li><a th:href="@{/my}" th:if="${loginUser!=null}"> <span th:utext="${loginUser.name}">admin</span>&nbsp;</a></li>
+    </ul>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">提示框</h4>
+            </div>
+            <div class="modal-body">您确认删除此条数据？视频（<span id="deletId" style="color: red"></span>）</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="delete">确认</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!--主页面-->
+<div id="main">
+    <!--面包导航-->
+    <ol class="breadcrumb">
+        <li><a th:href="@{/video/addVideo}">添加视频</a></li>
+    </ol>
+    <!-- 第一行-->
+    <div class="row">
+        <div class="col-sm-12">
+            <!--表格-->
+            <div class="panel panel-default">
+                <div class="panel-heading">视频管理</div>
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-condensed">
+                        <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>发布教师</th>
+                            <th>视频描述</th>
+                            <th>视频网址</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="videos:${videoList}">
+                            <td th:utext="${videos.id}">1</td>
+                            <td th:utext="${videos.teacher_id}">苹果</td>
+                            <td th:utext="${videos.description}">女</td>
+                            <td>
+                                <a th:href="${videos.url}" th:utext="${videos.url}"></a>
+                            </td>
+                            <td>
+                                <a class="btn-primary" th:href="@{|/video/edit/${videos.id}|}">编辑</a>
+                                <button class="btn-danger" data-toggle="modal" data-target="#myModal" th:data-id="${videos.id}">删除</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <nav class="mt-5" th:if="${page.rows>0}">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
+                        </li>
+                        <li th:class="|page-item ${page.current==1?'disabled':''}|">
+                            <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
+                        <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
+                            <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
+                        </li>
+                        <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
+                            <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div><!-- 第一行-->
+</div>
+<script th:src="@{/jQuery/jquery-2.1.4.min.js}"></script>
+<script th:src="@{/BootStrap/js/bootstrap.js}"></script>
+<script>
+    $(function() {
+        $('#myModal').on('show.bs.modal',
+            function(e) {
+                var target = $(e.relatedTarget).data('id');
+                $("#deletId").text(target);
+            });
 
+    });
+    $("#delete").click(function () {
+        var id = $("#deletId").text();
+        console.log(id);
+        $.ajax({
+            url: '/education/video/deleteVideo',
+            type: 'POST',
+            data: {
+                id : id
+            },
+            dataType: 'json',
+            success:function (data) {
+                location.reload();
+            },
+            error:function () {
+                location.reload();
+            }
+        })
+    });
+</script>
 </body>
 </html>

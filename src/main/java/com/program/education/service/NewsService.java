@@ -11,7 +11,9 @@ import java.util.List;
 * @createDate 2024-04-16 16:28:19
 */
 public interface NewsService {
-    List<News> selectAll();
+    List<News> selectAll(int offset, int limit);
 
     int addNews(News news);
+
+    int deleteNews(int id);
 }

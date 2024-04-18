@@ -17,4 +17,30 @@
         id,teacher_id,title,
         content,file,create_time
     </sql>
+    <sql id="insert">
+        teacher_id,title,
+        content,file,create_time
+    </sql>
+
+    <insert id="addWork" parameterType="Work" keyProperty="id">
+        insert into work (<include refid="insert"></include>)
+        values(#{teacher_id}, #{title}, #{content}, #{file}, #{create_time})
+    </insert>
+
+    <delete id="deleteWork">
+        delete from work where id = #{id}
+    </delete>
+
+    <select id="selectAll" resultType="com.program.education.entity.Work">
+        select <include refid="Base_Column_List"></include>
+        from work
+        order by create_time desc
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="selectById" resultType="com.program.education.entity.Work">
+        select <include refid="Base_Column_List"></include>
+        from work
+        where id = #{id}
+    </select>
 </mapper>

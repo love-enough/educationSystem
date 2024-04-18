@@ -1,7 +1,9 @@
 package com.program.education.controller;
 
+import com.program.education.entity.Page;
 import com.program.education.entity.User;
 import com.program.education.service.UserService;
+import com.program.education.utils.HostHolder;
 import com.program.education.utils.Message;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,26 +24,34 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private HostHolder hostHolder;
+
     @RequestMapping(path = "/userList", method = RequestMethod.GET)
-    public String getUserListPage(Model model) {
-        List<User> users = userService.selectUserList(1);
+    public String getUserListPage(Model model, Page page) {
+        page.setRows(userService.selectUserList(1).size());
+        page.setPath("/user/userList");
+        List<User> users = userService.selectUsers(1, page.getoffset(), page.getLimit());
         model.addAttribute("userList", users);
         return "site/user";
     }
 
+
     @RequestMapping(path = "/teacherList", method = RequestMethod.GET)
-    public String getTeacherListPage(Model model) {
-        List<User> users = userService.selectUserList(2);
+    public String getTeacherListPage(Model model, Page page) {
+        page.setRows(userService.selectUserList(2).size());
+        page.setPath("/user/teacherList");
+        List<User> users = userService.selectUsers(2, page.getoffset(), page.getLimit());
         model.addAttribute("userList", users);
         return "site/teacher";
     }
 
     @RequestMapping(path = "/addUser", method = RequestMethod.GET)
-    public String getAddUser() {
+    public String getAddUser(Model model) {
         return "site/editStudent";
     }
     @RequestMapping(path = "/addTeacher", method = RequestMethod.GET)
-    public String getAddTeacher() {
+    public String getAddTeacher(Model model) {
         return "site/editTeacher";
     }
 

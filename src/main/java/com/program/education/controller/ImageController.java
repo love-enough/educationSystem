@@ -2,6 +2,7 @@ package com.program.education.controller;
 
 import com.program.education.entity.Image;
 import com.program.education.service.ImageService;
+import com.program.education.utils.HostHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ import java.util.List;
 public class ImageController {
     @Autowired
     private ImageService imageService;
+    @Autowired
+    private HostHolder hostHolder;
 
     @RequestMapping(path = "/imageList", method = RequestMethod.GET)
     public String getImage(Model model) {

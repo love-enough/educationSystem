@@ -16,9 +16,11 @@ import java.util.List;
 @Mapper
 public interface NewsMapper {
 
-    List<News> selectAll();
+    List<News> selectAll(@Param("offset") int offset, @Param("limit") int limit);
 
     int addNews(News news);
+
+    int deleteById(int id);
 }
 
 
