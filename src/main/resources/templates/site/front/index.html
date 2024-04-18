@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>首页</title>
+	<link rel="stylesheet" th:href="@{/css/front/swiper.min.css}">
+	<link rel="stylesheet" th:href="@{/css/front/style.css}">
+	<link rel="stylesheet" th:href="@{/css/front/zd-1.0.css}">
+	<script th:src="@{/jQuery/jquery.min.js}"></script>
+	<script th:src="@{/js/swiper.min.js}"></script>
+
+</head>
+<body>
+<nav>
+	<!-- logo -->
+	<div class="nav-logo">
+		<a th:href="@{/front/index}">在线教育平台</a>
+	</div>
+
+	<!-- 控制menu -->
+	<div class="nav-menu">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+
+	<!-- 菜单 -->
+	<ul class="nav-list" th:fragment="nav">
+<!--		<li>-->
+<!--			<a href="" class="active">首页<div class="carect"></div></a>-->
+<!--			<ul class="menu">-->
+<!--				<li><a href="">不断学习</a></li>-->
+<!--				<li><a href="">不断进步</a></li>-->
+<!--			</ul>-->
+<!--		</li>-->
+		<li><a href="">课程视频</a></li>
+		<li><a href="">我的作业</a></li>
+		<li><a href="">我的信息</a></li>
+		<li><a href="">请假申请</a></li>
+		<li><a href="">关于我们</a></li>
+		<li><a href="">问题反馈</a></li>
+	</ul>
+</nav>
+<div class="container">
+	<section class="sec1">
+		<div class="main">
+			<!-- 基于swiper的新闻滚动组合1 -->
+			<div class="title"></div>
+			<div class="w-newsList w-newsList1 clearfix" id="newsList1">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" th:each="news:${news}">
+						<div class="news-item"><a href="#" class="clearfix">
+							<div class="news-imgbox img-count"><div class="aspectRatio"></div><div class="img-count-in"><img th:src="@{/images/front/img1.png}"></div></div>
+							<div class="news-text">
+								<div class="date">
+									<div class="year" th:text="${#dates.format(news.create_time,'yyyy-MM-dd HH:mm:ss')}">2020</div>
+									<div class="day_month" th:text="${#dates.format(news.create_time,'MM-dd')}">07-01</div>
+								</div>
+								<div class="news-h" th:utext="${news.title}">新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题1</div>
+								<div class="news-sum" th:utext="${news.content}">文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介介文字简介文字简介文字简介文字简介</div>
+								<div class="more"></div>
+							</div>
+						</a></div>
+					</div>
+				</div>
+				<div class="adSN_page"></div>
+				<div class="swiper-num">
+					<span class="active"></span>/
+					<span class="total"></span>
+				</div>
+			</div>
+			<script type="text/javascript">
+				$(function(){
+					/*图片位置计算*/
+					var imgCount = function () {
+						$('.img-count').each(function (index, element) {
+							var imgH = $(this).height();
+							var imgW = $(this).width();
+							var $thisimg = $(this).find('img');
+							var img = new Image();
+							img.onload = function () {
+								if ($thisimg.data("img") === false) {
+									return '';
+								}
+								var imgWidth = img.width;
+								var imgHeight = img.height;
+								if ((imgWidth / imgHeight) < (imgW / imgH)) {
+									$thisimg.css({'height': (imgW / imgH) * ((imgHeight * 1.00) / imgWidth) * imgH, 'max-height': (imgW / imgH) * ((imgHeight * 1.00) / imgWidth) * imgH, 'top': -((imgW / imgH) * ((imgHeight * 1.00) / imgWidth) - 1) / 2 * imgH})
+								} else {
+									$thisimg.css({'width': (imgH / imgW) * ((imgWidth * 1.00) / imgHeight) * imgW, 'max-width': (imgH / imgW) * ((imgWidth * 1.00) / imgHeight) * imgW, 'left': -((imgH / imgW) * ((imgWidth * 1.00) / imgHeight) - 1) / 2 * imgW})
+								}
+							}
+							img.src = $thisimg.attr("src");
+						});
+					}
+
+					//滚动设置
+					var swiper = new Swiper('#newsList1', {
+						effect : 'fade',
+						fadeEffect: {
+							crossFade: true,
+						},
+						direction : 'horizontal',
+						loop: true,
+						autoplay : {
+							delay:5000,//滚动速度
+							disableOnInteraction: false,
+						},
+						pagination: {
+							el: '.adSN_page',
+							clickable :true,
+						},
+						on:{
+							init:function(){
+								var total=this.slides.length-2;
+								$('.swiper-num .total').text('0'+total);
+								this.emit('transitionEnd');
+							},
+							transitionEnd:function(){
+								var index=this.realIndex+1;
+								$(".swiper-num .active").text("0"+index);
+							}
+						}
+					});
+
+					imgCount();
+					$(window).resize(function () {
+						imgCount();
+					});
+				});
+			</script>
+			<!-- 基于swiper的新闻滚动组合1 end-->
+		</div>
+	</section>
+</div>
+<script>
+	$(document).click(function(){
+		$('.nav-list').removeClass('open')
+	})
+	$('.nav-menu,.nav-list').click(function(e){e.stopPropagation()})
+	$('nav').find('.nav-menu').click(function(e){
+		$('.nav-list').toggleClass('open')
+	})
+</script>
+</body>
+</html>
