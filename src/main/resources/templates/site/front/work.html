@@ -1,10 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>我的作业</title>
+    <link rel="stylesheet" th:href="@{/BootStrap/css/bootstrap.min.css}">
+    <script th:src="@{/jQuery/jquery-2.1.4.min.js}"></script>
+    <script th:src="@{/BootStrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/front/swiper.min.css}">
+    <link rel="stylesheet" th:href="@{/css/front/style.css}">
+    <link rel="stylesheet" th:href="@{/css/front/zd-1.0.css}">
+    <script th:src="@{/jQuery/jquery.min.js}"></script>
+    <script th:src="@{/js/swiper.min.js}"></script>
 </head>
-<body>
+<body style="background-color: rgb(239, 239, 239);" >
+<nav>
+    <!-- logo -->
+    <div class="nav-logo">
+        <a th:href="@{/front/index}">在线教育平台</a>
+    </div>
 
+    <!-- 控制menu -->
+    <div class="nav-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- 菜单 -->
+    <ul class="nav-list" th:fragment="nav">
+        <!--		<li>-->
+        <!--			<a href="" class="active">首页<div class="carect"></div></a>-->
+        <!--			<ul class="menu">-->
+        <!--				<li><a href="">不断学习</a></li>-->
+        <!--				<li><a href="">不断进步</a></li>-->
+        <!--			</ul>-->
+        <!--		</li>-->
+        <li><a href="">课程视频</a></li>
+        <li><a th:href="@{/front/work}">我的作业</a></li>
+        <li><a th:href="@{/front/my}">我的信息</a></li>
+        <li><a th:href="@{/front/leave}">请假申请</a></li>
+        <li><a th:href="@{/front/about}">关于我们</a></li>
+        <li><a th:href="@{/front/problem}">问题反馈</a></li>
+    </ul>
+</nav>
+<div class="container"  style="text-align: center;" >
+    <div class="container" style="text-align: center;">
+<!--        <form class="form-inline" role="form" style="padding: 2% 0">-->
+<!--            <div class="form-group">-->
+<!--                <label class="sr-only" for="name">ID</label>-->
+<!--                <input type="text" class="form-control" name="yyname" placeholder="请输入题目ID">-->
+<!--            </div>-->
+<!--            &lt;!&ndash; <div class="form-group">-->
+<!--                <label class="sr-only" for="name">订单号</label>-->
+<!--                <input type="text" class="form-control" name="code" placeholder="请输入订单号">-->
+<!--            </div> &ndash;&gt;-->
+<!--            <button type="submit" class="btn btn-default">提交</button>-->
+<!--            <a href="">-->
+<!--                <button type="button" class="btn btn-default">清空</button>-->
+<!--            </a>-->
+<!--        </form>-->
+        <div class="content" style="border-radius: 5px; padding: 10px; background-color:rgb(255, 255, 255); margin-top: 20px;">
+            <table class="table text-left">
+                <thead>
+                <tr>
+                    <th>状态</th>
+                    <th>标题</th>
+                    <th>内容</th>
+                    <th>文件</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody  class="text-left">
+                <tr th:each="works:${works}">
+                    <td class="text-success" th:if="${#lists.contains(submit,works.id)}"><span class="glyphicon glyphicon-ok-circle"></span></td>
+<!--                    <td class="text-danger"><span class="glyphicon glyphicon-remove-circle"></span></td>-->
+                    <td class="text-primary" th:unless="${#lists.contains(submit,works.id)}"><span class="glyphicon glyphicon-pencil"></span></td>
+                    <td th:utext="${works.title}"></td>
+                    <td class="text-info" th:utext="${works.content}"></td>
+                    <td><button class="btn btn-primary">下载附件</button></td>
+                    <td style="color: grey;" th:text="${#dates.format(works.createTime,'yyyy MM-dd')}"></td>
+                    <td><button th:class="|btn btn-success ${#lists.contains(submit,works.id)}==true ? 'disabled' : ''|" >提交作业</button></td>
+                </tr>
+                </tbody>
+            </table>
+            <nav class="mt-5" th:if="${page.rows>0}">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
+                    </li>
+                    <li th:class="|page-item ${page.current==1?'disabled':''}|">
+                        <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
+                    <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
+                        <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
+                    </li>
+                    <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
+                        <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
 </body>
 </html>

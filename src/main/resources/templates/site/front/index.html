@@ -36,11 +36,11 @@
 <!--			</ul>-->
 <!--		</li>-->
 		<li><a href="">课程视频</a></li>
-		<li><a href="">我的作业</a></li>
-		<li><a href="">我的信息</a></li>
-		<li><a href="">请假申请</a></li>
-		<li><a href="">关于我们</a></li>
-		<li><a href="">问题反馈</a></li>
+		<li><a th:href="@{/front/work}">我的作业</a></li>
+		<li><a th:href="@{/front/my}">我的信息</a></li>
+		<li><a th:href="@{/front/leave}">请假申请</a></li>
+		<li><a th:href="@{/front/about}">关于我们</a></li>
+		<li><a th:href="@{/front/problem}">问题反馈</a></li>
 	</ul>
 </nav>
 <div class="container">
@@ -55,8 +55,8 @@
 							<div class="news-imgbox img-count"><div class="aspectRatio"></div><div class="img-count-in"><img th:src="@{/images/front/img1.png}"></div></div>
 							<div class="news-text">
 								<div class="date">
-									<div class="year" th:text="${#dates.format(news.create_time,'yyyy-MM-dd HH:mm:ss')}">2020</div>
-									<div class="day_month" th:text="${#dates.format(news.create_time,'MM-dd')}">07-01</div>
+									<div class="year" th:text="${#dates.format(news.createTime,'yyyy')}">2020</div>
+									<div class="day_month" th:text="${#dates.format(news.createTime,'MM-dd')}">07-01</div>
 								</div>
 								<div class="news-h" th:utext="${news.title}">新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题1</div>
 								<div class="news-sum" th:utext="${news.content}">文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介文字简介介文字简介文字简介文字简介文字简介</div>

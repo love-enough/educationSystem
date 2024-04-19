@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Bean;
 import java.util.List;
 
 /**
-* @author xihua
-* @description 针对表【user】的数据库操作Mapper
-* @createDate 2024-04-14 16:56:30
-* @Entity com.program.education.entity.User
-*/
+ * @author xihua
+ * @description 针对表【user】的数据库操作Mapper
+ * @createDate 2024-04-14 16:56:30
+ * @Entity com.program.education.entity.User
+ */
 @Mapper
 public interface UserMapper{
     User selectById(@Param("id") int id);
@@ -30,7 +30,3 @@ public interface UserMapper{
 
     List<User> selectUsers(@Param("type") int type, @Param("offset") int offset, @Param("limit") int limit);
 }
-
-
-
-

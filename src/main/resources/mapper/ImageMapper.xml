@@ -8,21 +8,21 @@
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="url" column="url" jdbcType="VARCHAR"/>
             <result property="status" column="status" jdbcType="INTEGER"/>
-            <result property="create_time" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,url,status,
-        create_time
+        createTime
     </sql>
     <sql id="insert">
         url,status,
-        create_time
+        createTime
     </sql>
 
     <insert id="addImage" parameterType="Image" keyProperty="id">
         insert into image (<include refid="insert"></include>)
-        values(#{url}, #{status}, #{create_time})
+        values(#{url}, #{status}, #{createTime})
     </insert>
 
     <update id="updateStatus">

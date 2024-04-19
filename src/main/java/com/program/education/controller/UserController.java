@@ -83,7 +83,7 @@ public class UserController {
             user.setSex(sex);
             user.setName(name);
             user.setType(type);
-            user.setCreate_time(new Date());
+            user.setCreateTime(new Date());
             int result = userService.insertUser(user);
             if(result == 1) {
                 message.setCode(1);
@@ -158,7 +158,7 @@ public class UserController {
         user.setName(name);
         user.setSex(sex);
         user.setType(type);
-        user.setCreate_time(new Date());
+        user.setCreateTime(new Date());
         int result =  userService.insertUser(user);
         if(result == 1)
             return "success!";

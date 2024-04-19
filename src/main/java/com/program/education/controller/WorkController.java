@@ -62,7 +62,7 @@ public class WorkController {
             work.setContent(content);
             work.setTeacher_id(1);
             work.setFile("null");
-            work.setCreate_time(new Date());
+            work.setCreateTime(new Date());
             int result = workService.addWork(work);
             if(result == 0) {
                 message.setCode(0);
@@ -87,7 +87,7 @@ public class WorkController {
         work.setContent(content);
         work.setTeacher_id(1);
         work.setFile("src/main/resources/static/teacherFile/" + file.getOriginalFilename());
-        work.setCreate_time(new Date());
+        work.setCreateTime(new Date());
         int result = workService.addWork(work);
         if(result == 0) {
             message.setCode(0);

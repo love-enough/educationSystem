@@ -9,22 +9,22 @@
             <result property="teacher_id" column="teacher_id" jdbcType="INTEGER"/>
             <result property="description" column="description" jdbcType="VARCHAR"/>
             <result property="url" column="url" jdbcType="VARCHAR"/>
-            <result property="create_time" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,teacher_id,description,
-        url,create_time
+        url,createTime
     </sql>
 
     <sql id="insert">
         teacher_id,description,
-        url,create_time
+        url,createTime
     </sql>
 
     <insert id="addVideo" parameterType="Video" keyProperty="id">
         insert into video (<include refid="insert"></include>)
-        values(#{teacher_id}, #{description}, #{url}, #{create_time})
+        values(#{teacher_id}, #{description}, #{url}, #{createTime})
     </insert>
 
     <delete id="deleteById">
@@ -34,7 +34,7 @@
     <select id="selectAll" resultType="com.program.education.entity.Video">
         select <include refid="Base_Column_List"></include>
         from video
-        order by create_time desc
+        order by createTime desc
         limit #{offset}, #{limit}
     </select>
 </mapper>

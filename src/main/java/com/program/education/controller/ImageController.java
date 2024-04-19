@@ -51,8 +51,8 @@ public class ImageController {
         Image image = new Image();
         String url = name + ".jpg";
         image.setUrl(url);
-        image.setCreate_time(new Date());
         image.setStatus(1);
+        image.setCreateTime(new Date());
         imageService.addImage(image);
         return "redirect:/image/imageList";
     }

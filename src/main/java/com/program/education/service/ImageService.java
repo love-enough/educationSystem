@@ -6,10 +6,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
 
 /**
-* @author xihua
-* @description 针对表【image】的数据库操作Service
-* @createDate 2024-04-16 16:28:19
-*/
+ * @author xihua
+ * @description 针对表【image】的数据库操作Service
+ * @createDate 2024-04-16 16:28:19
+ */
 public interface ImageService {
     List<Image> selectAll();
 

@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
-* @author xihua
-* @description 针对表【work】的数据库操作Service实现
-* @createDate 2024-04-16 16:28:19
-*/
+ * @author xihua
+ * @description 针对表【work】的数据库操作Service实现
+ * @createDate 2024-04-16 16:28:19
+ */
 @Service
 public class WorkServiceImpl implements WorkService{
 
@@ -40,7 +40,3 @@ public class WorkServiceImpl implements WorkService{
         return workMapper.deleteWork(id);
     }
 }
-
-
-
-

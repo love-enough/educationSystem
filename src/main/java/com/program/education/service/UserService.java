@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
-* @author xihua
-* @description 针对表【user】的数据库操作Service
-* @createDate 2024-04-14 16:56:30
-*/
+ * @author xihua
+ * @description 针对表【user】的数据库操作Service
+ * @createDate 2024-04-14 16:56:30
+ */
 
 public interface UserService{
     User selectById(int id);

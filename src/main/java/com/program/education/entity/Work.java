@@ -18,7 +18,7 @@ public class Work implements Serializable {
     /**
      * 作业id
      */
-    @TableId(value = "id")
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -48,8 +48,8 @@ public class Work implements Serializable {
     /**
      * 发布时间
      */
-    @TableField(value = "create_time")
-    private Date create_time;
+    @TableField(value = "createTime")
+    private Date createTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

@@ -18,7 +18,7 @@ public class Image implements Serializable {
     /**
      * 轮播图编号
      */
-    @TableId(value = "id")
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -36,9 +36,10 @@ public class Image implements Serializable {
     /**
      * 上传时间
      */
-    @TableField(value = "create_time")
-    private Date create_time;
+    @TableField(value = "createTime")
+    private Date createTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
 }

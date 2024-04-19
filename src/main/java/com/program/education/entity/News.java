@@ -42,8 +42,8 @@ public class News implements Serializable {
     /**
      * 创建时间
      */
-    @TableField(value = "create_time")
-    private Date create_time;
+    @TableField(value = "createTime")
+    private Date createTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

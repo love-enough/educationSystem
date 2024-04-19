@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>我的</title>
 </head>
 <body>
+<nav>
+    <!-- logo -->
+    <div class="nav-logo">
+        <a th:href="@{/front/index}">在线教育平台</a>
+    </div>
 
+    <!-- 控制menu -->
+    <div class="nav-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- 菜单 -->
+    <ul class="nav-list" th:replace="index::nav">
+        <!--		<li>-->
+        <!--			<a href="" class="active">首页<div class="carect"></div></a>-->
+        <!--			<ul class="menu">-->
+        <!--				<li><a href="">不断学习</a></li>-->
+        <!--				<li><a href="">不断进步</a></li>-->
+        <!--			</ul>-->
+        <!--		</li>-->
+        <li><a href="">课程视频</a></li>
+        <li><a th:href="@{/front/work}">我的作业</a></li>
+        <li><a href="">我的信息</a></li>
+        <li><a href="">请假申请</a></li>
+        <li><a href="">关于我们</a></li>
+        <li><a href="">问题反馈</a></li>
+    </ul>
+</nav>
 </body>
 </html>

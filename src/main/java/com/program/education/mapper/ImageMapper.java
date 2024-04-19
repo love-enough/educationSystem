@@ -9,11 +9,11 @@ import org.springframework.aop.target.LazyInitTargetSource;
 import java.util.List;
 
 /**
-* @author xihua
-* @description 针对表【image】的数据库操作Mapper
-* @createDate 2024-04-16 16:28:19
-* @Entity com.program.education.entity.Image
-*/
+ * @author xihua
+ * @description 针对表【image】的数据库操作Mapper
+ * @createDate 2024-04-16 16:28:19
+ * @Entity com.program.education.entity.Image
+ */
 
 @Mapper
 public interface ImageMapper {
@@ -24,7 +24,3 @@ public interface ImageMapper {
     int addImage(Image image);
 
 }
-
-
-
-

@@ -44,7 +44,7 @@ public class VideoController {
         video.setTeacher_id(1);
         video.setDescription(description);
         video.setUrl(url);
-        video.setCreate_time(new Date());
+        video.setCreateTime(new Date());
         int result = videoService.addVideo(video);
         return "redirect:/video/videoList";
     }

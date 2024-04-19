@@ -22,6 +22,12 @@ public class Upload implements Serializable {
     private Integer id;
 
     /**
+     * 作业id
+     */
+    @TableField(value = "work_id")
+    private Integer work_id;
+
+    /**
      * 提交用户
      */
     @TableField(value = "user_id")
@@ -36,8 +42,8 @@ public class Upload implements Serializable {
     /**
      * 上传时间
      */
-    @TableField(value = "create_time")
-    private Date create_time;
+    @TableField(value = "createTime")
+    private Date createTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

@@ -44,7 +44,7 @@ public class NewsController {
         News news = new News();
         news.setTitle(title);
         news.setContent(content);
-        news.setCreate_time(new Date());
+        news.setCreateTime(new Date());
         news.setAdmin_id(1);
         int result = newsService.addNews(news);
         return "redirect:/news/newsList";

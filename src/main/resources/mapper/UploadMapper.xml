@@ -6,13 +6,21 @@
 
     <resultMap id="BaseResultMap" type="com.program.education.entity.Upload">
             <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="work_id" column="work_id" jdbcType="INTEGER"/>
             <result property="user_id" column="user_id" jdbcType="INTEGER"/>
             <result property="file" column="file" jdbcType="VARCHAR"/>
-            <result property="create_time" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,user_id,file,
-        create_time
+        id,work_id,user_id,
+        file,createTime
     </sql>
+    <select id="selectSubmitWork" resultType="java.lang.Integer">
+        select work_id
+        from upload
+        where user_id = #{user_id}
+        order by createTime desc
+    </select>
+
 </mapper>

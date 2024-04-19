@@ -11,10 +11,10 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
-* @author xihua
-* @description 针对表【user】的数据库操作Service实现
-* @createDate 2024-04-14 16:56:30
-*/
+ * @author xihua
+ * @description 针对表【user】的数据库操作Service实现
+ * @createDate 2024-04-14 16:56:30
+ */
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -65,7 +65,3 @@ public class UserServiceImpl implements UserService{
 
 
 }
-
-
-
-

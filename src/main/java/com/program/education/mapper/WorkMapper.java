@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
-* @author xihua
-* @description 针对表【work】的数据库操作Mapper
-* @createDate 2024-04-16 16:28:19
-* @Entity com.program.education.entity.Work
-*/
+ * @author xihua
+ * @description 针对表【work】的数据库操作Mapper
+ * @createDate 2024-04-16 16:28:19
+ * @Entity com.program.education.entity.Work
+ */
 
 @Mapper
 public interface WorkMapper {
@@ -26,7 +26,3 @@ public interface WorkMapper {
 
     int deleteWork(int id);
 }
-
-
-
-

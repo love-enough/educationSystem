@@ -10,21 +10,21 @@
             <result property="title" column="title" jdbcType="VARCHAR"/>
             <result property="content" column="content" jdbcType="VARCHAR"/>
             <result property="file" column="file" jdbcType="VARCHAR"/>
-            <result property="create_time" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,teacher_id,title,
-        content,file,create_time
+        content,file,createTime
     </sql>
     <sql id="insert">
         teacher_id,title,
-        content,file,create_time
+        content,file,createTime
     </sql>
 
     <insert id="addWork" parameterType="Work" keyProperty="id">
         insert into work (<include refid="insert"></include>)
-        values(#{teacher_id}, #{title}, #{content}, #{file}, #{create_time})
+        values(#{teacher_id}, #{title}, #{content}, #{file}, #{createTime})
     </insert>
 
     <delete id="deleteWork">
@@ -34,7 +34,7 @@
     <select id="selectAll" resultType="com.program.education.entity.Work">
         select <include refid="Base_Column_List"></include>
         from work
-        order by create_time desc
+        order by createTime desc
         limit #{offset}, #{limit}
     </select>
 

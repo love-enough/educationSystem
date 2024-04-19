@@ -9,21 +9,21 @@
             <result property="admin_id" column="admin_id" jdbcType="INTEGER"/>
             <result property="title" column="title" jdbcType="VARCHAR"/>
             <result property="content" column="content" jdbcType="VARCHAR"/>
-            <result property="create_time" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,admin_id,title,
-        content,create_time
+        content,createTime
     </sql>
     <sql id="insert">
         admin_id,title,
-        content,create_time
+        content,createTime
     </sql>
 
     <insert id="addNews" parameterType="News" keyProperty="id">
         insert into news (<include refid="insert"></include>)
-        values(#{admin_id}, #{title}, #{content}, #{create_time})
+        values(#{admin_id}, #{title}, #{content}, #{createTime})
     </insert>
     <delete id="deleteById">
         delete from news where id = #{id}
@@ -32,7 +32,7 @@
     <select id="selectAll" resultType="com.program.education.entity.News">
         select <include refid="Base_Column_List"></include>
         from news
-        order by create_time desc
+        order by createTime desc
         limit #{offset}, #{limit}
     </select>
 </mapper>
