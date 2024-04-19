@@ -13,4 +13,6 @@ import java.util.List;
 public interface UploadService {
 
     List<Integer> selectSubmitWork(int user_id);
+
+    int addUpload(Upload upload);
 }

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="apple-touch-fullscreen" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+
+        <title>请假申请</title>
+
+        <link rel="stylesheet" type="text/css" th:href="@{/css/front/base.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/front/home.css}">
+        <link rel="stylesheet" th:href="@{/css/front/swiper.min.css}">
+        <link rel="stylesheet" th:href="@{/css/front/style.css}">
+        <link rel="stylesheet" th:href="@{/css/front/zd-1.0.css}">
+        <script th:src="@{/jQuery/jquery.min.js}"></script>
+        <script th:src="@{/js/swiper.min.js}"></script>
+		
+    </head>
+    <body style="background-color: rgb(239, 239, 239);">
+    <nav>
+        <!-- logo -->
+        <div class="nav-logo">
+            <a th:href="@{/front/index}">在线教育平台</a>
+        </div>
+
+        <!-- 控制menu -->
+        <div class="nav-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <!-- 菜单 -->
+        <ul class="nav-list" th:fragment="nav">
+            <!--		<li>-->
+            <!--			<a href="" class="active">首页<div class="carect"></div></a>-->
+            <!--			<ul class="menu">-->
+            <!--				<li><a href="">不断学习</a></li>-->
+            <!--				<li><a href="">不断进步</a></li>-->
+            <!--			</ul>-->
+            <!--		</li>-->
+            <li><a href="">课程视频</a></li>
+            <li><a th:href="@{/front/work}">我的作业</a></li>
+            <li><a th:href="@{/front/leave}">请假申请</a></li>
+        </ul>
+    </nav>
+        <section class="aui-content">
+            <div style="height:20px;"></div>
+            <div class="aui-content-up">
+                <div class="aui-content-up-form">
+                    <h2>请假单</h2>
+                </div>
+                <form th:action="@{/leave/ask}" name="ask" method="post" id="ask">
+                    <input type="hidden" th:value="${loginUser.id}" name="user_id">
+                    <div class="aui-form-group clear">
+                        <label class="aui-label-control">
+                            请假理由
+                        </label>
+                        <div class="aui-form-input">
+                            <textarea class="aui-form-control" name="content" id="4" minlength="5" placeholder="请输入您的请假理由"></textarea>
+                        </div>
+                    </div>
+                    <div class="aui-form-group clear">
+                        <label class="aui-label-control">
+                            起始时间
+                        </label>
+                        <div class="aui-form-input">
+                            <input type="datetime-local" class="aui-form-control-two" name="fromTime" onBlur="checkna()" required id="fromTime" step="1">
+                            <span class="tips" id="divname">假条的开始时间</span>
+                        </div>
+                    </div>
+                    <div class="aui-form-group clear">
+                        <label class="aui-label-control">
+                            终止时间
+                        </label>
+                        <div class="aui-form-input">
+                            <input type="datetime-local" class="aui-form-control-two" name="toTime" onBlur="checkna()" required id="toTime" step="1">
+                            <span class="tips" id="divname">假条的作废的时间</span>
+                        </div>
+                    </div>
+                    <div class="aui-form-group-text">
+                        <h3>填写说明</h3>
+                        <p>请同学按照实际情况如实填写，如发现违规情况，必将追究责任！</p>
+                    </div>
+                </form>
+            </div>
+            <div class="aui-btn-default">
+                <button class="aui-btn aui-btn-account" id="askSubmit">保存并提交审核</button>
+            </div>
+        </section>
+        <!-- mask begin -->
+        <div class="aui-mask aui-works-mask">
+            <div class="aui-mask-content">
+                <p class="aui-delete-text">确定要删除你上传的资料？</p>
+                <p class="aui-check-text">
+                    <span class="aui-delete aui-accept-ok">确定</span>
+                    <span class="aui-accept-no">取消</span>
+                </p>
+            </div>
+        </div>
+        <!-- mask end -->
+        <script src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/up.js"></script>
+        <script type="text/javascript">
+
+            $("#askSubmit").click(function () {
+                $("#ask").submit();
+            })
+            
+
+            //验证姓名
+            function checkna(){
+
+                na=form1.yourname.value;
+
+                if( na.length <1 || na.length >6)
+
+                {
+
+                    divname.innerHTML='<font class="tips_false">长度是1~6个字符</font>';
+
+
+
+                }else{
+
+                    divname.innerHTML='<font class="tips_true">输入正确</font>';
+
+
+
+                }
+
+
+
+            }
+
+            //验证手机号码
+            function checkpsd1(){
+
+                na=form1.youphone.value;
+
+                if( na.length <11 || na.length >11)
+
+                {
+
+                    phone.innerHTML='<font class="tips_false">必须是11位的数字</font>';
+
+
+
+                }else{
+
+                    phone.innerHTML='<font class="tips_true">输入正确</font>';
+
+
+
+                }
+
+
+
+            }
+
+            //验证社会统一代码
+            function checkpsd2(){
+
+                na=form1.youziz.value;
+
+                if( na.length <18 || na.length >18)
+
+                {
+
+                    zizhi.innerHTML='<font class="tips_false">必须是18位社会信用代码</font>';
+
+
+
+                }else{
+
+                    zizhi.innerHTML='<font class="tips_true">输入正确</font>';
+
+
+
+                }
+
+
+
+            }
+
+
+
+        
+        </script>
+    </body>
+</html>

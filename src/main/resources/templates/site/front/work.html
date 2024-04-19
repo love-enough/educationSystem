@@ -37,12 +37,35 @@
         <!--		</li>-->
         <li><a href="">课程视频</a></li>
         <li><a th:href="@{/front/work}">我的作业</a></li>
-        <li><a th:href="@{/front/my}">我的信息</a></li>
         <li><a th:href="@{/front/leave}">请假申请</a></li>
-        <li><a th:href="@{/front/about}">关于我们</a></li>
-        <li><a th:href="@{/front/problem}">问题反馈</a></li>
     </ul>
 </nav>
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">上传作业</h4>
+            </div>
+            <div class="modal-body">
+                <form id="Upload" role="form" th:action="@{/front/upload}" enctype="multipart/form-data" method="post">
+                    <div class="form-group">
+                        <input type="file" id="inputfile" name="file" multiple>
+                        <input type="hidden" name="user_id" th:value="${loginUser.id}">
+                        <input id="workId" name="work_id" value="" type="hidden">
+                    </div>
+                </form>
+                <div class="upload">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="confirm">上传</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
 <div class="container"  style="text-align: center;" >
     <div class="container" style="text-align: center;">
 <!--        <form class="form-inline" role="form" style="padding: 2% 0">-->
@@ -78,13 +101,21 @@
                     <td class="text-primary" th:unless="${#lists.contains(submit,works.id)}"><span class="glyphicon glyphicon-pencil"></span></td>
                     <td th:utext="${works.title}"></td>
                     <td class="text-info" th:utext="${works.content}"></td>
-                    <td><button class="btn btn-primary">下载附件</button></td>
+                    <td>
+                        <form th:action="@{/work/uploadWork}" method="get">
+                            <input type="hidden" th:value="${works.id}" name="id">
+                            <button class="btn btn-primary" th:data-orderId="${works.id}" id="download" type="submit">下载附件</button>
+                        </form>
+                    </td>
                     <td style="color: grey;" th:text="${#dates.format(works.createTime,'yyyy MM-dd')}"></td>
-                    <td><button th:class="|btn btn-success ${#lists.contains(submit,works.id)}==true ? 'disabled' : ''|" >提交作业</button></td>
+                    <td>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#Modal" th:unless="${#lists.contains(submit,works.id)}" th:data-id="${works.id}" onclick="workBtn(this)">提交作业</button>
+                        <span th:if="${#lists.contains(submit,works.id)}">待审阅</span>
+                    </td>
                 </tr>
                 </tbody>
             </table>
-            <nav class="mt-5" th:if="${page.rows>0}">
+            <nav class="mt-5" th:if="${page.rows>0}" style="margin-bottom: 10px;">
                 <ul class="pagination justify-content-center">
                     <li class="page-item">
                         <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
@@ -105,5 +136,27 @@
         </div>
     </div>
 </div>
+<script>
+    // $(function() {
+    //     $('#Modal').on('show.bs.modal',
+    //         function(e) {
+    //             console.log(e);
+    //             var target = $(e.relatedTarget).data('id');
+    //             console.log(target);
+    //             console.log($("#workId").val());
+    //             $("#workId").text(target);
+    //         });
+    //
+    // });
+
+    function workBtn(e) {
+        var id =  e.getAttribute("data-id");
+        $("#workId").val(id);
+    }
+
+    $("#confirm").click(function (e) {
+        $("#Upload").submit();
+    });
+</script>
 </body>
 </html>

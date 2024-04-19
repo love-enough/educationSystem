@@ -16,6 +16,17 @@
         id,work_id,user_id,
         file,createTime
     </sql>
+
+    <sql id="insert">
+        work_id,user_id,
+        file,createTime
+    </sql>
+
+    <insert id="addUpload">
+        insert into upload (<include refid="insert"></include>)
+        values(#{work_id}, #{user_id}, #{file}, #{createTime})
+    </insert>
+
     <select id="selectSubmitWork" resultType="java.lang.Integer">
         select work_id
         from upload

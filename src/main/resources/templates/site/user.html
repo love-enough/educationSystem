@@ -128,7 +128,9 @@
     $(function() {
         $('#myModal').on('show.bs.modal',
             function(e) {
+            console.log(e);
             var target = $(e.relatedTarget).data('id');
+            console.log(target);
             $("#deletId").text(target);
             });
         

@@ -24,6 +24,11 @@ public class UploadServiceImpl implements UploadService{
     public List<Integer> selectSubmitWork(int user_id) {
         return uploadMapper.selectSubmitWork(user_id);
     }
+
+    @Override
+    public int addUpload(Upload upload) {
+        return uploadMapper.addUpload(upload);
+    }
 }
 
 

@@ -45,6 +45,9 @@
     <ul class="nav navbar-nav" style="margin-right: 20px" th:if="${loginUser.type != 1}">
         <li><a th:href="@{/work/workList}">&nbsp;作业管理</a></li>
     </ul>
+    <ul class="nav navbar-nav" style="margin-right: 20px" th:if="${loginUser.type != 1}">
+        <li><a th:href="@{/leave/leaveList}">&nbsp;请假管理</a></li>
+    </ul>
     <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
         <li><a th:href="@{/logout}">&nbsp;退出</a></li>
     </ul>
